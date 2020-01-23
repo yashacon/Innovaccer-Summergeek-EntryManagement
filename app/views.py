@@ -6,8 +6,8 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 from twilio.rest import Client
 def send_sms(to_,v_n,v_e,v_p):
-    account_sid = 'ACb08881500d18938d653eef8fd8c405e4'
-    auth_token = '9f008ff896bf5eaf7afd73d6afc294a0'
+    account_sid = 'ACCOUNT SID'
+    auth_token = 'AUTH TOKEN'
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
@@ -23,7 +23,7 @@ def send_mail(to_mail,v_n,v_e,v_p):
         subject='You Have a Visitor',
         html_content='<strong>Visitor Details: <br> </strong>'+str(v_n)+'<br>'+str(v_e)+'<br>'+str(v_p))
     try:
-        sg = SendGridAPIClient('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')
+        sg = SendGridAPIClient('APICLIENT TOKEN')
         print(sg)
         sg.send(message)
         print('done')

@@ -14,7 +14,7 @@ def send_mail(to_mail,v_name,v_phone,check_in,check_out,h_name):
         subject='Your Visiting Details',
         html_content='<strong>Visitor Details: <br> </strong>'+'<strong>Name:</strong>'+str(v_name)+'<br>'+'<strong>Phone</strong>'+str(v_phone)+'<br>'+'<strong>You checked in at</strong>'+str(check_in)+'<br>'+'<strong>Checked out at</strong>'+str(check_out)+'<br>'+'<strong>You Visited</strong>'+str(h_name))
     try:
-        sg = SendGridAPIClient('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')
+        sg = SendGridAPIClient('API CLIENT TOKEN')
         sg.send(message)
         return True
         
@@ -23,8 +23,8 @@ def send_mail(to_mail,v_name,v_phone,check_in,check_out,h_name):
         return False
 
 def send_sms(to_,v_name,v_email,check_in,check_out,h_name):
-    account_sid = 'ACb08881500d18938d653eef8fd8c405e4'
-    auth_token = '9f008ff896bf5eaf7afd73d6afc294a0'
+    account_sid = 'ACCOUNT SID'
+    auth_token = 'AUTH TOKEN'
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(

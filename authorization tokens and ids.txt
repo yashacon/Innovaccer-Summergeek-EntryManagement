@@ -1,0 +1,3 @@
+account_sid = 'ACb08881500d18938d653eef8fd8c405e4'
+auth_token = '9f008ff896bf5eaf7afd73d6afc294a0'
+sg=sendGridAPIClient('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')

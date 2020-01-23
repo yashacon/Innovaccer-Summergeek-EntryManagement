@@ -1,0 +1,114 @@
+{% extends 'base.html' %} 
+{% block content %}
+{% load static %}
+<div>
+  <a href="{% url 'archive' %}" class="btn btn-primary btn-block">Check Archive</a>
+</div>
+<div>
+  <a href="{% url 'HOME' %}" class="btn btn-primary btn-block">Go Home</a>
+</div>
+{% if messages %}
+  {% for message in messages %}
+    <div id="message" class="container">
+      <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+        <strong>
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            Error: 
+          {% else %}
+            {{ message.tags|title }}
+          {% endif %}
+        </strong>
+        {{ message }}
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
+<section id="entries" class="py-4">
+    <div class="container">
+      <div class="row">
+        {% if entries %}
+          {% for entry in entries %}
+          <div class="col-md-6 col-lg-4 mb-4">
+              <div class="card listing-preview">
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h4 class="text-primary">Visitor Name-{{ entry.visitor_name }}</h4>
+                    <h4 class="text-primary">Host Name-{{ entry.host_name }}</h4>
+                    <h4 class="text-primary">Host Email-{{ entry.host_email }}</h4>
+                    <h4 class="text-primary">Host Phone-{{ entry.host_phone }}</h4>
+                    <h4 class="text-primary">Visitor Email-{{ entry.visitor_email }}</h4>
+                    <h4 class="text-primary">Visitor Phone-{{ entry.visitor_phone }}</h4>
+                    <h4 class="text-primary">CheckIn Time-{{ entry.checkin }}</h4>
+                    
+                  </div>
+                  
+                  <a href="{% url 'checking' pk=entry.pk %}" class="btn btn-primary btn-block">Check Out</a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Entries</p>
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          {% if entries.has_other_pages %}
+            <ul class="pagination">
+              {% if entries.has_previous %}
+                <li class="page-item">
+                  <a href="?page={{entries.previous_page_number}}" class="page-link">&laquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link">&laquo;</a>
+                </li>
+              {% endif %}
+              {% for i in entries.paginator.page_range %}
+                {% if entries.number == i %}
+                  <li class="page-item active">
+                    <a class="page-link">{{i}}</a>
+                  </li>
+                {% else %}
+                  <li class="page-item">
+                    <a href="?page={{i}}" class="page-link">{{i}}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              {% if entries.has_next %}
+                <li class="page-item">
+                  <a href="?page={{entries.next_page_number}}" class="page-link">&raquo;</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link">&raquo;</a>
+                </li>
+              {% endif %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+{% if messages %}
+  {% for message in messages %}
+    <div id="message" class="container">
+      <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+        <!--<strong>-->
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            Error: 
+          {% else %}
+            {{ message.tags|title }}
+          {% endif %}
+        <!--</strong>-->
+        {{ message }}
+      </div>
+    </div>
+  {% endfor %}
+{% endif %}
